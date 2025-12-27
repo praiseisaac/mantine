@@ -24,6 +24,14 @@ function parseItem(
   }
 
   if ('group' in item) {
+    if (!Array.isArray(item.items)) {
+      console.warn('Combobox: items in group must be an array');
+      return {
+        group: item.group,
+        items: [],
+      };
+    }
+
     return {
       group: item.group,
       items: item.items.map((i) => parseItem(i) as ComboboxItem),
